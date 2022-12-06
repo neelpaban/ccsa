@@ -1,6 +1,7 @@
 <html>
 <head>
 <script type="text/javascript">
+
 function ValidateTextBox()
 {
 	if(document.getElementById("b").value.trim().length<6)
@@ -36,20 +37,24 @@ function ValidateTextBox()
 </script>
 </head>
 
-<body>
+<body bgcolor="yellow">
+<h1 style="text-align:center" >selenium testing form</h1>
 <form>
-<p>
+<p style="text-align:center">
 <input type="text" name="b" id="b">
 </p>
-<p>
+<p style="text-align:center">
 <input type="text" name="c" id="c">
 </p>
+<p style="text-align:center">
 <input type="text" name="d" id="d">
+</p>
+<p style="text-align:center">
 <input type="submit" name="submit" onclick="return ValidateTextBox()">
+</p>
 </form>
 </body>
 </html>
-
 
 
 
