@@ -1,0 +1,166 @@
+<html>
+<head>
+<script type="text/javascript">
+function ValidateTextBox()
+{
+	if(document.getElementById("b").value.trim().length<6)
+	{
+		alert("Please enter atleast 6 characters");
+		return false;
+	}
+	else
+	{
+		alert("String length is: "+document.getElementById("b").value.trim().length);
+	}
+	
+	if(document.getElementById("c").value.trim().length<5)
+	{
+		alert("Please enter atleast 5 characters");
+		return false;
+	}
+	else
+	{
+		alert("String length is: "+document.getElementById("c").value.trim().length);
+	}
+
+	if(document.getElementById("d").value.trim().length<4)
+	{
+		alert("Please enter atleast 4 characters");
+		return false;
+	}
+	else
+	{
+		alert("String length is: "+document.getElementById("d").value.trim().length);
+	}
+};
+</script>
+</head>
+
+<body>
+<form>
+<p>
+<input type="text" name="b" id="b">
+</p>
+<p>
+<input type="text" name="c" id="c">
+</p>
+<input type="text" name="d" id="d">
+<input type="submit" name="submit" onclick="return ValidateTextBox()">
+</form>
+</body>
+</html>
+
+
+
+
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.get("https://www.google.com")
+
+
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.alert import Alert
+#import org.openqa.selenium.WebElement
+
+
+options=Options()
+options.add_argument("start-maximaized")
+driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+driver.get("C://Users//kaushik barman//Videos//alert.html")
+driver.find_element(By.NAME,'b').send_keys('abcdef')
+driver.find_element(By.NAME, 'c').send_keys('abcde')
+driver.find_element(By.NAME,'d').send_keys('abcd')
+button=driver.find_element(By.NAME, 'submit')
+button.click()
+alert=Alert(driver)
+print(alert.text)
+alert.accept()
+WebDriverWait(driver, 5).until(EC.alert_is_present(), 'Time out waiting for prompt alert to appear')
+alert=Alert(driver)
+print(alert.text)
+alert.accept()
+alert=Alert(driver)
+print(alert.text)
+alert.accept()
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+      function test() {
+        if(document.getElementById("fname").value.trim()==""){
+  alert("NULL values not accepted!");
+  return false;
+}
+      }
+    </script>
+  </head>
+<body>
+
+<h2>first form</h2>
+
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname"><br>
+  <button onclick="test()" name="submit">submit</button>
+    </form> 
+
+
+
+</body>
+</html>
+
+
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+browser = webdriver.Chrome('Users/neelpabansarmah/Desktop/chromedriver')
+from webdriver_manager.chrome import chromedriver
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.get("https://www.google.com")
+
+
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.alert import Alert
+#import org.openqa.selenium.WebElement
+
+options = Options()
+options.add_argument("start-maximized")
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options = options)
+driver.get("C://Users//elhus//Desktop//SE_Practicals//index.html")
+driver.find_element(By.NAME, 'fname').send_keys('')
+button=driver.find_element(By.NAME, 'submit')
+button.click()
+WebDriverWait(driver, 5).until(EC.alert_is_present(), 'Timed out waiting for prompt alert to appear')
+alert = Alert(driver)
+print(alert.text)
+alert.accept()
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
