@@ -86,3 +86,110 @@ $conn->close();
     </form>
 </body>
 </html>
+---------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table and Form Example</title>
+    <style>
+        /* Apply background image to the body */
+        body {
+            background-image: url('your_background_image.jpg'); /* Replace with the path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Style for the table */
+        table {
+            width: 50%;
+            margin: 50px auto; /* Center the table */
+            border-collapse: collapse;
+            border: 2px solid #ddd;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style for the form */
+        .form-container {
+            width: 50%;
+            margin: 20px auto; /* Center the form */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Table Section -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>25</td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Insert Data</h2>
+        <form method="post" action="process_form.php"> <!-- Replace with your form processing script -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>
