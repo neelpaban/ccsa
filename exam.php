@@ -96,7 +96,7 @@ $conn->close();
     <style>
         /* Apply background image to the body */
         body {
-            background-image: url('your_background_image.jpg'); /* Replace with the path to your background image */
+            background-image: url('your_background_image.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             margin: 0;
@@ -182,7 +182,7 @@ $conn->close();
     <!-- Form Section -->
     <div class="form-container">
         <h2>Insert Data</h2>
-        <form method="post" action="process_form.php"> <!-- Replace with your form processing script -->
+        <form method="post" action="">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <label for="age">Age:</label>
