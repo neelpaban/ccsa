@@ -1,195 +1,257 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "examdb";
+Exaple of Graphical Method:
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
+Steps: install.packages("lpSolve")   or  import from local zip file ( Zip file may be downloaded also)
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+
+1. Codes to solve
+
+Max Z=20X+60Z
+
+Subject to,
+
+30X+20Y<=2700
+5X+10Y<=850
+X+Y<=95
+
+X,Y>= 0
+
+> install.packages("lpSolve") 
+> library("lpSolve")
+> obj.fun<-c(20,60)
+> constr<-matrix(c(30,20,5,10,1,1),ncol=2,byrow=TRUE)
+> constr.dir<-c("<=","<=","<=")
+> rhs<-c(2700,850,95)
+> prod.sol<-lp("max",obj.fun,constr,constr.dir,rhs,compute.sens=TRUE)
+> prod.sol
+Success: the objective function is 5100 
+> prod.sol$solution
+[1]  0 85
+
+( Compare the result manually)
+
+
+
+
+2.  Similar Example
+
+ library("lpSolve")
+> obj.fun<-c(40,35)
+> constr<-matrix(c(2,3,4,3),ncol=2,byrow=TRUE)
+> constr.dir<-c("<=","<=")
+> rhs<-c(60,96)
+> prod.sol<-lp("max",obj.fun,constr,constr.dir,rhs,compute.sens=TRUE)
+> prod.sol
+Success: the objective function is 1000
+> prod.sol$solution
+
+[1] 18  8
+
+( Compare the Result manually) 
+------------------------------------------------------------------------------------------------------------------
+                                    NWC 1
+------------------------------------------------------------------------------------------------------------------
+#include<conio.h>
+#include<stdio.h>
+main()
+{
+int c[20][20],i,k,j,m,n,dem[20],sup[20],sum=0,al[20][20];
+
+printf("\nEnter the no of rows & columns:");
+scanf("%d%d",&m,&n);
+
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+al[i][j]=0;
+}
+}
+printf("\nEnter the cost:");
+for(i=0;i<m;i++)
+{
+
+for(j=0;j<n;j++)
+scanf("%d",&c[i][j]);
+}
+printf("\nEnter the demand:");
+for(i=0;i<n;i++)
+scanf("%d",&dem[i]);
+printf("\nEnter the supply:");
+for(i=0;i<m;i++)
+
+scanf("%d",&sup[i]);
+printf("\nMatrix:\n\n +");
+for(i=0;i<n;i++)
+{
+printf("------+");
+}
+printf("\n ");
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+printf("| %d ",c[i][j]);
+printf("| %d \n +",sup[i]);
+for(k=0;k<n;k++)
+printf("------+");
+printf("\n ");
 }
 
-// Create database
-$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
-if ($conn->query($sql) === TRUE) {
-    echo "Database created successfully<br>";
-} else {
-    echo "Error creating database: " . $conn->error . "<br>";
+for(j=0;j<n;j++)
+printf(" %d ",dem[j]);
+
+for(i=0,j=0;(i<m&&j<n);)
+{
+if(sup[i]<dem[j])
+{
+sum+=c[i][j]*sup[i];
+al[i][j]=sup[i];
+dem[j]-=sup[i];
+
+sup[i]=0;
+i++;
+}
+else
+if(sup[i]>dem[j])
+{
+sum+=c[i][j]*dem[j];
+al[i][j]=dem[j];
+sup[i]-=dem[j];
+dem[j]=0;
+j++;
+}
+else
+if(sup[i]=dem[j])
+{
+sum+=c[i][j]*dem[j];
+al[i][j]=dem[j];
+sup[i]=0;
+dem[j]=0;
+j++;
+i++;
 }
 
-// Select the created database
-$conn->select_db($dbname);
-
-// Create table
-$sql = "CREATE TABLE IF NOT EXISTS students (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
-    age INT(3) NOT NULL
-)";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Table created successfully<br>";
-} else {
-    echo "Error creating table: " . $conn->error . "<br>";
 }
 
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get user input
-    $name = $_POST["name"];
-    $age = $_POST["age"];
+printf("\n\n Allocation \n +",sum);
+for(i=0;i<n;i++)
 
-    // Insert data into the table
-    $sql = "INSERT INTO students (name, age) VALUES ('$name', $age)";
+{
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Record inserted successfully<br>";
-    } else {
-        echo "Error inserting record: " . $conn->error . "<br>";
-    }
+printf("-----+");
+}
+printf("\n ");
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+printf("| %d ",al[i][j]);
+}
+printf("|\n +");
+for(k=0;k<n;k++)
+printf("-----+");
+printf("\n ");
 }
 
-// Retrieve data and display in webpage
-$sql = "SELECT * FROM students";
-$result = $conn->query($sql);
+printf("\n\nfeasible solution = %d",sum);
 
-if ($result->num_rows > 0) {
-    echo "<table><tr><th>ID</th><th>Name</th><th>Age</th></tr>";
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["age"] . "</td></tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
+getch();
+}
+------------------------------------------------------------------------------------------------------------------
+                                     NWC 2
+------------------------------------------------------------------------------------------------------------------
+#include<conio.h>
+#include<stdio.h>
+main()
+{
+int c[20][20],i,k,j,m,n,dem[20],sup[20],sum=0,al[20][20];
+printf("\nEnter the no of rows & columns:");
+scanf("%d%d",&m,&n);
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+al[i][j]=0;
+}
+}
+printf("\nEnter the cost:");
+for(i=0;i<m;i++)
+{
+
+for(j=0;j<n;j++)
+scanf("%d",&c[i][j]);
+}
+printf("\nEnter the demand:");
+for(i=0;i<n;i++)
+scanf("%d",&dem[i]);
+printf("\nEnter the supply:");
+for(i=0;i<m;i++)
+scanf("%d",&sup[i]);
+printf("\nMatrix:\n\n +");
+for(i=0;i<n;i++)
+{
+printf("------+");
+}
+printf("\n ");
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+printf("| %d ",c[i][j]);
+printf("| %d \n +",sup[i]);
+for(k=0;k<n;k++)
+printf("------+");
+printf("\n ");
+}
+for(j=0;j<n;j++)
+printf(" %d ",dem[j]);
+for(i=0,j=0;(i<m&&j<n);)
+{
+if(sup[i]<dem[j])
+{
+sum+=c[i][j]*sup[i];
+al[i][j]=sup[i];
+dem[j]-=sup[i];
+sup[i]=0;
+i++;
 }
 
-// Close connection
-$conn->close();
-?>
+else
+if(sup[i]>dem[j])
+{
+sum+=c[i][j]*dem[j];
+al[i][j]=dem[j];
+sup[i]-=dem[j];
+dem[j]=0;
+j++;
+}
+else
+if(sup[i]=dem[j])
+{
+sum+=c[i][j]*dem[j];
+al[i][j]=dem[j];
+sup[i]=0;
+dem[j]=0;
+j++;
+i++;
+}
+}
+printf("\n\n Allocation \n +",sum);
+for(i=0;i<n;i++)
+{
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>21992162</title>
-</head>
-<body>
-    <h2>Insert Data</h2>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        Name: <input type="text" name="name"><br>
-        Age: <input type="number" name="age"><br>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
----------------------------
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table and Form Example</title>
-    <style>
-        /* Apply background image to the body */
-        body {
-            background-image: url('your_background_image.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Style for the table */
-        table {
-            width: 50%;
-            margin: 50px auto; /* Center the table */
-            border-collapse: collapse;
-            border: 2px solid #ddd;
-            background-color: #fff;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Style for the form */
-        .form-container {
-            width: 50%;
-            margin: 20px auto; /* Center the form */
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-        }
-
-        .form-container label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .form-container input[type="text"],
-        .form-container input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .form-container input[type="submit"] {
-            background-color: #4caf50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .form-container input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Table Section -->
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>25</td>
-        </tr>
-        <!-- Add more rows as needed -->
-    </table>
-
-    <!-- Form Section -->
-    <div class="form-container">
-        <h2>Insert Data</h2>
-        <form method="post" action="">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" required>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-
-</body>
-</html>
+printf("-----+");
+}
+printf("\n ");
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+printf("| %d ",al[i][j]);
+}
+printf("|\n +");
+for(k=0;k<n;k++)
+printf("-----+");
+printf("\n ");
+}
+printf("\n\nfeasible solution = %d",sum);
+getch();
+}
